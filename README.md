@@ -50,11 +50,28 @@ A query language is any computer programming language written for the purpose of
 
 - Resolvers provide the instructions for turning a GraphQL operation (a query, mutation, or subscription) into data. They either return the same type of data we specify in our schema or a promise for that data.
 - Essentially it's a controller that will go and retrieve the specified information from the database or perform a specific operation to it.
+  ```
+  const resolver = {
+    Query: {
+      movie: async (_, { _id }) => await MovieService.getMovieById(_id),
+      randomMovie: async _ => await MovieService.getRandomMovie()
+    }
+  }
+  ```
 
 #### Services (optional)
 
 - When the logic in a resolver gets complex and unwieldy, its best to abstract this logic to a "Service".
 - This is purely for maintainability and reusability of code. Generally we like our resolvers to be as concise as possible so that its clear what they're returning
+  ```
+  class MovieService {
+    static getMovieById = async _id => await Movie.findById(_id);
+    static getRandomMovie = async _ => {
+      const [movie] = await Movie.aggregate([{ $sample: { size: 1 } }]);
+      return movie;
+    };
+  }
+  ```
 
 #### Fields
 
