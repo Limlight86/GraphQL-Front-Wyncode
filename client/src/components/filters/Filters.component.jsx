@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { FormGroup } from '..';
+import { isString } from '../../utilities';
 
 const Filters = ({ filterType = [], onApplyFilters, onClearFilters, className }) => {
   const [filtersToApply, setFiltersToApply] = useState({});
@@ -9,7 +10,14 @@ const Filters = ({ filterType = [], onApplyFilters, onClearFilters, className })
     setFiltersToApply({});
     onClearFilters();
   };
-  const handleApplyFilters = _ => onApplyFilters(filtersToApply);
+  const handleApplyFilters = _ => {
+    const parsedFilters = Object.keys(filtersToApply).reduce((acc, id) => {
+      const value = filtersToApply[id];
+      value && Object.assign(acc, { [id]: isString(value) ? value.trim() : value });
+      return acc;
+    }, {});
+    onApplyFilters(parsedFilters);
+  };
   return (
     <div>
       <div className={classNames('filters', className)}>
