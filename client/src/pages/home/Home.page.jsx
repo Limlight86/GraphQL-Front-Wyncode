@@ -7,6 +7,7 @@ const Home = _ => (
     <p className="lead">
       Check out each route for different examples! Or in a hurry? Just press the button to get a random movie
     </p>
+    <button className="btn btn-info-outline btn-lg m-t-1">Randomize Movie</button>
   </SectionWrapper>
 );
 
