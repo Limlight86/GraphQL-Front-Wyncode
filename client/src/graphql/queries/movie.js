@@ -27,3 +27,16 @@ export const FetchMovie = gql`
     }
   }
 `;
+
+export const FetchRandomMovie = gql`
+  query FetchRandomMovie {
+    randomMovie {
+      title
+      year
+      director
+      duration
+      genre
+      rate
+    }
+  }
+`;
