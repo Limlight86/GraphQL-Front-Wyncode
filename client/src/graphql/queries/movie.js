@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const FetchMovies = gql`
-  query FetchMovies {
-    movies {
+  query FetchMovies($where: MovieWhereInput) {
+    movies(where: $where) {
       _id
       title
       year
