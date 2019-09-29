@@ -23,7 +23,7 @@ const MovieList = _ => {
 
   useEffect(() => {
     !loading && setMovies(data.movies || []);
-  }, [loading]);
+  }, [loading, data]);
 
   return (
     <SectionWrapper>
