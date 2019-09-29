@@ -4,7 +4,7 @@ import { isString } from '../../utilities';
 
 const Form = ({ className, schema: { id, fields = [], formHeading, submitText } = {}, handleSubmit }) => {
   const initialState = fields.reduce((acc, field) => {
-    acc[field.id] = field.multiSelect ? [] : String();
+    acc[field.id] = field.defaultValue || (field.multiSelect ? [] : String());
     return acc;
   }, {});
   const formReducer = (state, payload) => ({ ...state, ...payload });
